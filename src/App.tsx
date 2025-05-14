@@ -1,5 +1,5 @@
 function App() {
-  return <div>React Production Setup</div>;
+    return <div>React Production Setup</div>
 }
 
-export default App;
+export default App
