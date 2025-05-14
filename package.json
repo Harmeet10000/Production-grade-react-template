@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "prepare": "husky",
+    "lint:eslint": "eslint",
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
