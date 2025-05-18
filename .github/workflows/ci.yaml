@@ -39,3 +39,32 @@ jobs:
                   PORT: ${{ secrets.PORT }}
                   BACKEND_PROXY: ${{ secrets.BACKEND_PROXY }}
                   VITE_ENV: ${{ vars.VITE_ENV }}
+
+    production:
+        needs: test
+        runs-on: ubuntu-latest
+        environment: production
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Setup node js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '22'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build the application
+              run: npm run build
+              env:
+                  PORT: ${{ secrets.PORT }}
+                  BACKEND_PROXY: ${{ secrets.BACKEND_PROXY }}
+                  VITE_ENV: ${{ vars.VITE_ENV }}
+
+            - name: Upload build artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: dist
+                  path: dist
