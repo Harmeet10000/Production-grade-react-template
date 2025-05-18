@@ -61,6 +61,7 @@ jobs:
               env:
                   PORT: ${{ secrets.PORT }}
                   BACKEND_PROXY: ${{ secrets.BACKEND_PROXY }}
+                  SENTRY_TOKEN: ${{ secrets.SENTRY_TOKEN }}
                   VITE_ENV: ${{ vars.VITE_ENV }}
 
             - name: Upload build artifacts

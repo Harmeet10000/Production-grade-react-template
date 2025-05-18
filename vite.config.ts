@@ -3,17 +3,23 @@ import { defineConfig, loadEnv, type ServerOptions } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
+import { sentryVitePlugin } from '@sentry/vite-plugin'
 
 type TMode = 'development' | 'test' | 'production'
 
 interface AppEnv {
     PORT: string
     BACKEND_PROXY: string
+    SENTRY_TOKEN: string
     VITE_ENV: TMode
 }
 
 const validateEnv = (envMode: TMode, env: AppEnv) => {
     const requiredVars: (keyof AppEnv)[] = ['PORT', 'BACKEND_PROXY', 'VITE_ENV']
+
+    if (envMode === 'production') {
+        requiredVars.push('SENTRY_TOKEN')
+    }
 
     for (const key of requiredVars) {
         if (!env[key]) {
@@ -52,7 +58,19 @@ export default defineConfig(({ mode }) => {
     }
 
     return {
-        plugins: [react(), tailwindcss()],
+        plugins: [
+            react(),
+            tailwindcss(),
+            env.VITE_ENV === 'production' &&
+                sentryVitePlugin({
+                    org: 'bb-coder-guy',
+                    project: 'react-production-setup',
+                    authToken: env.SENTRY_TOKEN,
+                    sourcemaps: {
+                        filesToDeleteAfterUpload: 'dist/assets/**/*.map'
+                    }
+                })
+        ],
         test: {
             globals: true,
             environment: 'jsdom',
@@ -80,6 +98,7 @@ export default defineConfig(({ mode }) => {
         preview: config,
         build: {
             minify: true,
+            sourcemap: env.VITE_ENV === 'production',
             rollupOptions: {
                 external: [/.*\.(test|spec)\.(ts|tsx)$/]
             }
