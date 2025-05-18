@@ -1,12 +1,5 @@
-import Navbar from '@shared/components/Navbar'
-
 const Feature2Page = () => {
-    return (
-        <div>
-            Feature 2 Page
-            <Navbar />
-        </div>
-    )
+    return <div>Feature 2 Page</div>
 }
 
 export default Feature2Page
