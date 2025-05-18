@@ -10,6 +10,7 @@
         "format:fix": "prettier --write .",
         "lint:stylelint": "stylelint **/*.css",
         "dev": "vite --mode development",
+        "test": "vitest --mode test",
         "build": "tsc -b && vite build --mode production",
         "preview": "vite preview --mode production"
     },
@@ -23,6 +24,8 @@
         "@commitlint/config-conventional": "^19.8.1",
         "@eslint/js": "^9.25.0",
         "@tailwindcss/vite": "^4.1.6",
+        "@testing-library/jest-dom": "^6.6.3",
+        "@testing-library/react": "^16.3.0",
         "@types/react": "^19.1.2",
         "@types/react-dom": "^19.1.2",
         "@vitejs/plugin-react": "^4.4.1",
@@ -32,6 +35,7 @@
         "eslint-plugin-react-refresh": "^0.4.19",
         "globals": "^16.0.0",
         "husky": "^9.1.7",
+        "jsdom": "^26.1.0",
         "lint-staged": "^16.0.0",
         "prettier": "^3.5.3",
         "stylelint": "^16.19.1",
@@ -39,6 +43,7 @@
         "stylelint-config-tailwindcss": "^1.0.0",
         "typescript": "~5.8.3",
         "typescript-eslint": "^8.30.1",
-        "vite": "^6.3.5"
+        "vite": "^6.3.5",
+        "vitest": "^3.1.3"
     }
 }
