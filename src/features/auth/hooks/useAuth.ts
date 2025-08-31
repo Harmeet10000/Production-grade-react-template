@@ -1,11 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, logoutUser } from '../slices/authSlice';
+import { RootState, AppDispatch } from '../../../store';
+
+interface LoginCredentials {
+  email: string;
+  password: string;
+}
 
 export const useAuth = () => {
-  const dispatch = useDispatch();
-  const { user, isLoading, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch<AppDispatch>();
+  const { user, isLoading, error } = useSelector((state: RootState) => state.auth);
 
-  const login = (credentials) => {
+  const login = (credentials: LoginCredentials) => {
     dispatch(loginUser(credentials));
   };
 

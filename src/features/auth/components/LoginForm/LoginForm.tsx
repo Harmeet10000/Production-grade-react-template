@@ -1,11 +1,20 @@
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import Button from '../../../../components/common/Button';
 import './LoginForm.module.scss';
 
-const LoginForm = ({ onSubmit }) => {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
+interface LoginCredentials {
+  email: string;
+  password: string;
+}
 
-  const handleSubmit = (e) => {
+interface LoginFormProps {
+  onSubmit: (credentials: LoginCredentials) => void;
+}
+
+const LoginForm = ({ onSubmit }: LoginFormProps) => {
+  const [credentials, setCredentials] = useState<LoginCredentials>({ email: '', password: '' });
+
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     onSubmit(credentials);
   };
