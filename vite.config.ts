@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 import { sentryVitePlugin } from '@sentry/vite-plugin'
+import { TanStackRouterVite } from '@tanstack/router-vite-plugin'
 
 type TMode = 'development' | 'test' | 'production'
 
@@ -59,6 +60,7 @@ export default defineConfig(({ mode }) => {
 
     return {
         plugins: [
+            TanStackRouterVite(),
             react(),
             tailwindcss(),
             env.VITE_ENV === 'production' &&

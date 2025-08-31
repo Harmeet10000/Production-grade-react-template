@@ -1,16 +1,8 @@
-import { Provider } from 'react-redux';
-import store from './store';
-import MainLayout from './layouts/MainLayout/MainLayout';
-import { LoginPage } from './features/auth';
+import { RouterProvider } from '@tanstack/react-router'
+import { router } from './router'
 
 function App() {
-  return (
-    <Provider store={store}>
-      <MainLayout>
-        <LoginPage />
-      </MainLayout>
-    </Provider>
-  );
+    return <RouterProvider router={router} />
 }
 
 export default App
